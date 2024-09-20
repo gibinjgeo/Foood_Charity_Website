@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Donations</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+<style>
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: black;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* Add padding to containers */
+.container {
+  padding: 16px;
+  background-color: white;
+}
+
+/* Full-width input fields */
+input[type=text], input[type=text] {
+  width: 100%;
+  padding: 15px;
+  margin: 5px 0 22px 0;
+  display: inline-block;
+  border: none;
+  background: #f1f1f1;
+}
+
+input[type=text]:focus, input[type=password]:focus {
+  background-color: #ddd;
+  outline: none;
+}
+
+/* Overwrite default styles of hr */
+hr {
+  border: 1px solid #f1f1f1;
+  margin-bottom: 25px;
+}
+
+
+/* Set a style for the submit button */
+.registerbtn {
+  background-color: #04AA6D;
+  color: white;
+  padding: 16px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  opacity: 0.9;
+}
+.registerbtn:hover {
+  opacity: 1;
+}
+
+/* Add a blue text color to links */
+a {
+  color: dodgerblue;
+}
+
+/* Set a grey background color and center the text of the "sign in" section */
+.signin {
+  background-color: #f1f1f1;
+  text-align: center;
+}
+#myVideo {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  min-width: 100%; 
+  min-height: 100%;
+}
+.content {
+  position: absolute;
+  top: 0%;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  color: #070606;
+  width: 100%;
+  padding: 150px;
+}
+</style>
+</head>
+<body>
+  <video autoplay muted loop id="myVideo">
+    <source src="test.mp4" type="video/mp4">
+    Your browser does not support HTML5 video.
+  </video>
+  <div class="container-fluid">
+  <div class="content">
+  <div class="container">
+    <h1>Donations</h1>
+    <p>To get donation details fill out required form  <a href="dindex.html" class="btn btn-link">Home</a></p>
+    <p>If you don't know the donor's username please check your registered email</p>
+    <hr>
+
+    <label for="username"><b>username *</b></label>
+    <input type="text" placeholder="username" name="un" id="user" required>
+
+    <label for="email"><b>Email of the donated person</b></label>
+    <input type="text" placeholder="Email" name="email" id="email">
+
+    <label for="food"><b>Type of Food donated</b></label>
+    <input type="text" placeholder="Food Name" name="food" id="food">
+
+    <label for="place"><b>pic up place</b></label>
+    <input type="text" placeholder="Place" name="place" id="place">
+    <button id="Selbtn" class="registerbtn" >Fetch Details</button>
+    
+    <p>By donating you agree to our <a href="tac.html">Terms & Privacy</a>.</p>
+  </div>
+</div>
+</div>
+</body>
+<script type="module">
+
+    // Import the functions you need from the SDKs you need
+  
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.1.0/firebase-app.js";
+
+    import { getDatabase, get, ref, update, set, child, remove } from "https://www.gstatic.com/firebasejs/9.1.0/firebase-database.js";
+  
+    import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.1.0/firebase-analytics.js";
+  
+    // TODO: Add SDKs for Firebase products that you want to use
+  
+    // https://firebase.google.com/docs/web/setup#available-libraries
+  
+  
+    // Your web app's Firebase configuration
+  
+    // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+  
+    const firebaseConfig = {
+  
+      apiKey: "AIzaSyB7XSf4zho4TSL08LpPefycp47NTuJwA60",
+  
+      authDomain: "test-1aa4f.firebaseapp.com",
+  
+      databaseURL: "https://test-1aa4f-default-rtdb.asia-southeast1.firebasedatabase.app",
+  
+      projectId: "test-1aa4f",
+  
+      storageBucket: "test-1aa4f.appspot.com",
+  
+      messagingSenderId: "1074081039703",
+  
+      appId: "1:1074081039703:web:211c881e3b1dc3d24baa12",
+  
+      measurementId: "G-6ZJ3VL7T0L"
+  
+    };
+  
+  
+    // Initialize Firebase
+  
+    const app = initializeApp(firebaseConfig);
+  
+    const analytics = getAnalytics(app); 
+    const db = getDatabase();
+
+    var selBtn = document.getElementById("Selbtn");
+
+    var user = document.getElementById("user");
+
+
+//888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888
+function SelectData(){
+
+    const dbref = ref(db);
+    
+    get (child(dbref, "donation/"+ user.value)).then((snapshot)=>{
+    
+    if(snapshot.exists()){
+    
+    user.value = snapshot.val().user;
+    
+    email.value = snapshot.val().email;
+    
+    food.value = snapshot.val().food;
+
+    place.value = snapshot.val().place;
+    
+    }
+    
+    else{
+    
+    alert("No data found");
+    
+    }
+    
+    })
+    
+    .catch((error)=>{
+    
+    alert("unsuccessful, error"+error);
+    
+    });
+    
+    }
+//88888888888888888888888888888888888888888888888888888888888888888888888888888
+selBtn.addEventListener('click', SelectData);
+
+
+//fgsdfngkdrfhjglidshrgoildslofighpariwohgpioawrhgpiuahrsgiopuhaprihgpiuhwegfoliuhw
+</script>
+</html>
