@@ -4,25 +4,26 @@ function someFunc() {
    save();
    
 }
-var firebaseConfig = {
-
-    apiKey: "AIzaSyB7XSf4zho4TSL08LpPefycp47NTuJwA60",
-
-    authDomain: "test-1aa4f.firebaseapp.com",
-
-    databaseURL: "https://test-1aa4f-default-rtdb.asia-southeast1.firebasedatabase.app",
-
-    projectId: "test-1aa4f",
-
-    storageBucket: "test-1aa4f.appspot.com",
-
-    messagingSenderId: "1074081039703",
-
-    appId: "1:1074081039703:web:211c881e3b1dc3d24baa12",
-
-    measurementId: "G-6ZJ3VL7T0L"
-
-  };
+    //fille the below empty filed with your Credentials
+    const firebaseConfig = {
+  
+        apiKey: "",
+    
+        authDomain: "",
+    
+        databaseURL: "",
+    
+        projectId: "",
+    
+        storageBucket: "",
+    
+        messagingSenderId: "",
+    
+        appId: "",
+    
+        measurementId: ""
+    
+      };
 
 
   // Initialize Firebase
