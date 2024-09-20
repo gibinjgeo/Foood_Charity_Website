@@ -70,4 +70,24 @@ Technologies Used
     JavaScript: For form validation, authentication, and database operations.
     Firebase: Used for authentication and real-time database management.
 
-
+this filed has to be filled in all places missing in the code
+    //fille the below empty filed with your Credentials
+    const firebaseConfig = {
+  
+      apiKey: "",
+  
+      authDomain: "",
+  
+      databaseURL: "",
+  
+      projectId: "",
+  
+      storageBucket: "",
+  
+      messagingSenderId: "",
+  
+      appId: "",
+  
+      measurementId: ""
+  
+    };
